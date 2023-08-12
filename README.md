@@ -17,6 +17,7 @@ As seguintes tecnologias foram utilizadas na construção do projeto:
  - **[.NET Core 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)**
  - **[Azure SQL](https://azure.microsoft.com/pt-br/services/sql-database/)**
  - **[Azure Cloud](https://azure.microsoft.com/pt-br/)**
+ - **[Swagger](https://swagger.io/)**
 
 > Para mais detalhes, veja o arquivo  **[Tasks.csproj](Tasks.csproj)**
 
@@ -37,6 +38,9 @@ Antes de começar, você vai precisar ter instalado em sua máquina as seguintes
 $ git clone https://github.com/Brendhon/dm106-tasks.git
 
 # Acesse a pasta do projeto
+
+# Limpe o projeto
+$ dotnet clean
 
 # Build da aplicação
 $ dotnet build
