@@ -18,7 +18,10 @@ public class TaskController : ControllerBase
   [HttpGet]
   public string GetAll()
   {
+    // Log information
     _logger.LogInformation("Get all logs");
+
+    // Return all tasks
     return "All tasks";
   }
 }
