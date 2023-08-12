@@ -64,6 +64,23 @@ $ dotnet run
 Após executar a aplicação, acesse a documentação da API em: **[http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)**
 
 
+---
+
+## Comandos úteis
+
+```bash
+
+# Criar migration
+$ dotnet ef migrations add <nome da migration> --context <nome do contexto>
+
+# Atualizar banco de dados
+$ dotnet ef database update
+
+# Atualizar banco de dados no Azure com base no local
+$ dotnet ef database update --connection "<your-azure-sql-connection-string>" --context TaskContext
+
+```
+
 ## 👥 Autor
 <h4 align="left">
 <img style="border-radius: 5%; margin-right: 30px" src="https://avatars.githubusercontent.com/Brendhon" width="120px;" alt="Avatar"/><br>
