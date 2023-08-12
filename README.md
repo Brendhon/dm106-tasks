@@ -6,7 +6,7 @@
 
 Este projeto da disciplina DM106 (Desenvolvimento de Web Services com segurança sob plataforma .NET) tem como objetivo criar uma API REST para gerenciar tarefas.
 
-Para isso, foi utilizado o framework .NET Core 7.0, Azure SQL e a Azure Cloud para hospedar a API.
+Para isso, foi utilizado o framework .NET Core 7.0, Azure SQL e a Azure Web App.
 
 ---
 
@@ -16,7 +16,7 @@ As seguintes tecnologias foram utilizadas na construção do projeto:
 
  - **[.NET Core 7.0](https://dotnet.microsoft.com/download/dotnet/7.0)**
  - **[Azure SQL](https://azure.microsoft.com/pt-br/services/sql-database/)**
- - **[Azure Cloud](https://azure.microsoft.com/pt-br/)**
+ - **[Azure Web App](https://azure.microsoft.com/pt-br/services/app-service/web/)**
  - **[Swagger](https://swagger.io/)**
 
 > Para mais detalhes, veja o arquivo  **[Tasks.csproj](Tasks.csproj)**
@@ -46,7 +46,30 @@ $ dotnet clean
 $ dotnet build
 
 ```
+
+É necessário também ter uma conta na **[Azure](https://azure.microsoft.com/pt-br/)**, criar um banco de dados SQL, criar uma Web App e criar um arquivo **appsettings.json** na raiz do projeto com a seguinte estrutura:
+
+```json
+{
+  "Logging": {
+    "LogLevel": {
+      "Default": "Information",
+      "Microsoft.AspNetCore": "Warning"
+    }
+  },
+  "AllowedHosts": "*",
+  "ConnectionStrings": {
+    "AZURE_SQL_CONNECTION": "<connection-string-do-banco-de-dados>"
+  }
+}
+
+```
+
 ### ⚽ Rodando no modo desenvolvedor
+
+É necessário a criação de um arquivo **appsettings.Development.json** na raiz do projeto com a mesma estrutura do arquivo **appsettings.json**.
+
+Após isso, execute o seguinte comando:
 
 ```bash
 
@@ -56,13 +79,6 @@ $ dotnet run
 # Iniciará na porta:500
 
 ```
-
----
-
-
-## 📝 Documentação
-Após executar a aplicação, acesse a documentação da API em: **[http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)**
-
 
 ---
 
@@ -80,6 +96,13 @@ $ dotnet ef database update
 $ dotnet ef database update --connection "<your-azure-sql-connection-string>" --context TaskContext
 
 ```
+
+---
+
+## Observações
+- Lembrando que é necessário habilitar o acesso ao banco de dados do Azure para o IP da sua máquina, caso contrário, não será possível acessar o banco de dados.
+- Após executar a aplicação, acesse a documentação da API em: **[http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)**
+---
 
 ## 👥 Autor
 <h4 align="left">
