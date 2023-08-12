@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore;
 using Task.Models;
 using Task.Services;
 
@@ -55,6 +56,29 @@ public class TaskController : ControllerBase
 
     // Return the task
     return CreatedAtAction(nameof(GetById), new { id = task!.Id }, task);
+  }
+
+  // PUT: api/Task/status?taskId=5&status=Done
+  [HttpPut]
+  [Route("status")]
+  public ActionResult UpdateStatus(int taskId, string status)
+  {
+    try
+    {
+      // Update the task status
+      TaskModel? taskUpdated = _taskService.UpdateStatus(taskId, status);
+
+      // Check if the task was updated
+      if (taskUpdated is not null) return Ok(taskUpdated);
+
+      // If the task was not updated, return not found
+      return NotFound();
+    }
+    catch (DbUpdateException)
+    {
+      // If the task was not updated, return bad request
+      return BadRequest("Falha ao alterar status da tarefa");
+    }
   }
 
   // PUT: api/Task/5
