@@ -86,22 +86,36 @@ $ dotnet run
 
 ```bash
 
-# Criar migration
+# Gerando o arquivo de migração
 $ dotnet ef migrations add <nome da migration> --context <nome do contexto>
 
-# Atualizar banco de dados
+# Após fazer a migração no comando anterior, vamos agora aplicar essas migrações no banco
 $ dotnet ef database update
 
-# Atualizar banco de dados no Azure com base no local
+# Aplicar as migrações em um banco de dados específico
 $ dotnet ef database update --connection "<your-azure-sql-connection-string>" --context TaskContext
+
+# Para remover uma migração e que inclusive já foi enviada para o banco, use
+$ dotnet ef migrations remove
+$ dotnet ef database update
+
+# Para gerar o script SQL do banco, use o comando
+$ dotnet ef migrations script -o ./script.sql
 
 ```
 
 ---
 
 ## Observações
+
 - Lembrando que é necessário habilitar o acesso ao banco de dados do Azure para o IP da sua máquina, caso contrário, não será possível acessar o banco de dados.
 - Após executar a aplicação, acesse a documentação da API em: **[http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)**
+- Lembre-se, sempre que alterar o banco de dados, é necessário criar uma nova migration e atualizar o banco de dados, para isso, utilize os comando acima.
+- Caso use o Visual Studio Code, recomendo que instale as seguintes extensões para facilitar o desenvolvimento:
+  - **[Azure App Service](https://marketplace.visualstudio.com/items?itemName=ms-azuretools.vscode-azureappservice)**
+  - **[C#](https://marketplace.visualstudio.com/items?itemName=ms-dotnettools.csharp)**
+  - **[Azure Account](https://marketplace.visualstudio.com/items?itemName=ms-vscode.azure-account)**
+
 ---
 
 ## 👥 Autor

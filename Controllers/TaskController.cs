@@ -25,6 +25,7 @@ public class TaskController : ControllerBase
   [HttpGet]
   public IEnumerable<TaskModel> GetAll()
   {
+    // Get all tasks
     return _taskService.GetAll();
   }
 
@@ -32,22 +33,27 @@ public class TaskController : ControllerBase
   [HttpGet("{id}")]
   public ActionResult<TaskModel> GetById(int id)
   {
+    // Get the task by id
     TaskModel? task = _taskService.GetById(id);
-    if (task is not null)
-    {
-      return Ok(task);
-    }
-    else
-    {
-      return NotFound();
-    }
+
+    // Check if the task exists and return it
+    if (task is not null) return Ok(task);
+
+    // If the task does not exist, return not found
+    return NotFound();
   }
 
   // POST: api/Task
   [HttpPost]
   public ActionResult Create(TaskModel newTask)
   {
+    // Check if the model is valid
+    if (!ModelState.IsValid) return BadRequest(ModelState);
+
+    // Create the task
     TaskModel task = _taskService.Create(newTask);
+
+    // Return the task
     return CreatedAtAction(nameof(GetById), new { id = task!.Id }, task);
   }
 
@@ -55,15 +61,19 @@ public class TaskController : ControllerBase
   [HttpPut("{id}")]
   public ActionResult Update(int id, TaskModel task)
   {
-    if (id != task.Id)
-    {
-      return BadRequest();
-    }
+    // Check if the model is valid
+    if (!ModelState.IsValid) return BadRequest(ModelState);
+
+    // Check if the id is the same
+    if (id != task.Id) return BadRequest();
+
+    // Update the task
     TaskModel? taskUpdated = _taskService.Update(id, task);
-    if (taskUpdated is not null)
-    {
-      return Ok(taskUpdated);
-    }
+
+    // Check if the task was updated
+    if (taskUpdated is not null) return Ok(taskUpdated);
+
+    // If the task was not updated, return not found
     return NotFound();
   }
 
@@ -71,14 +81,13 @@ public class TaskController : ControllerBase
   [HttpDelete("{id}")]
   public ActionResult Delete(int id)
   {
+    // Delete the task
     TaskModel? taskToBeDeleted = _taskService.DeleteById(id);
-    if (taskToBeDeleted is not null)
-    {
-      return Ok(taskToBeDeleted);
-    }
-    else
-    {
-      return NotFound();
-    }
+
+    // Check if the task was deleted
+    if (taskToBeDeleted is not null) return Ok(taskToBeDeleted);
+
+    // If the task was not deleted, return not found
+    return NotFound();
   }
 }
