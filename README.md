@@ -49,11 +49,16 @@ $ dotnet build
 # Execute a aplicação
 $ dotnet run
 
-# Iniciará na porta:5044
+# Iniciará na porta:500
 
 ```
 
 ---
+
+
+## 📝 Documentação
+Após executar a aplicação, acesse a documentação da API em: **[http://localhost:5000/swagger/index.html](http://localhost:5000/swagger/index.html)**
+
 
 ## 👥 Autor
 <h4 align="left">
